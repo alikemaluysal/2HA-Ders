@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Service
 {
-    public class ProductService
+    public class ProductService : IService
     {
 
         #region Ödev

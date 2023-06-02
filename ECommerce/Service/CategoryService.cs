@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Service
 {
-    public class CategoryService
+    public class CategoryService : IService
     {
 
         Database _database;
@@ -95,5 +95,6 @@ namespace ECommerce.Service
             _database.Categories.Add(category3);
             _database.SaveChanges();
         }
+
     }
 }

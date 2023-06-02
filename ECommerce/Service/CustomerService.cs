@@ -9,7 +9,7 @@ using ECommerce.Entities;
 namespace ECommerce.Service
 {
 
-    public class CustomerService
+    public class CustomerService : IService
     {
         Database _database;
 
@@ -51,10 +51,20 @@ namespace ECommerce.Service
             Customer customerToUpdate = _database.Customers.FirstOrDefault(c => c.Id == id);
             Customer newCustomer = new Customer();
             Console.Write("Yeni adı girin: ");
-            newCustomer.FirstName = Console.ReadLine();
+            string firstName = Console.ReadLine();
+            if (!String.IsNullOrEmpty(firstName))
+                newCustomer.FirstName = firstName;
+
             Console.Write("Yeni soyadı girin: ");
-            newCustomer.LastName = Console.ReadLine();
+            string lastName = Console.ReadLine();
+            if (!String.IsNullOrEmpty(firstName))
+                newCustomer.LastName = firstName;
             Console.Write("Yeni email adresini girin: ");
+
+            string email = Console.ReadLine();
+            if (!String.IsNullOrEmpty(email))
+                newCustomer.Email = email;
+
             newCustomer.Email = Console.ReadLine();
             customerToUpdate.FirstName = newCustomer.FirstName;
             customerToUpdate.LastName = newCustomer.LastName;
@@ -64,7 +74,6 @@ namespace ECommerce.Service
             _database.Customers.Update(customerToUpdate);
             _database.SaveChanges();
         }
-
 
         public void Delete()
         {
