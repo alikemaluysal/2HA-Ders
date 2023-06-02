@@ -86,17 +86,29 @@ namespace ECommerce.Service
             Product productToUpdate = _database.Products.FirstOrDefault(x => x.Id == id);
 
             Console.Write("Ürünün yeni adını girin: ");
-            productToUpdate.Name = Console.ReadLine();
+            string name = Console.ReadLine();
+
+            if(!String.IsNullOrEmpty(name)) 
+                productToUpdate.Name = name;
 
             Console.Write("Ürünün yeni fiyatını girin: ");
-            productToUpdate.Price = decimal.Parse(Console.ReadLine());
+            string price = Console.ReadLine();
+            if (!String.IsNullOrEmpty(price))
+                productToUpdate.Price = decimal.Parse(price);
+
+
 
             Console.Write("Ürünün yeni stok adedini girin: ");
-            productToUpdate.Stock = int.Parse(Console.ReadLine());
+            string stock = Console.ReadLine();
+            if (!String.IsNullOrEmpty(stock))
+                productToUpdate.Stock = int.Parse(stock);
 
             GetCategories();
             Console.WriteLine("Ürünün yeni kategorisini girin: ");
-            productToUpdate.CategoryId = int.Parse(Console.ReadLine());
+
+            string categoryId = Console.ReadLine();
+            if (!String.IsNullOrEmpty(categoryId))
+                productToUpdate.CategoryId = int.Parse(categoryId);
 
             /*
              *  Kategoriler: 

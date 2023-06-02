@@ -22,9 +22,9 @@ namespace ECommerce.Service
             categoryService.AddSeedData();
             productService.AddSeedData();
             //productService.Delete();
-            productService.GetAll();
-            //productService.Create();
             //productService.GetAll();
+            ////productService.Create();
+            ////productService.GetAll();
             productService.Update();
             productService.GetAll();
 
@@ -32,6 +32,9 @@ namespace ECommerce.Service
             //productService.Create();
             //productService.GetAll();
             //productService.GetAll();
+
+            //categoryService.Update();
+            //categoryService.GetAll();
 
         }
 

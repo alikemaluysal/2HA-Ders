@@ -50,6 +50,39 @@ namespace ECommerce.Service
             _database.SaveChanges();
         }
 
+        public void Update()
+        {
+            Console.WriteLine("Kategoriler");
+            Console.WriteLine("--------------");
+            GetAll();
+
+            Console.Write("Güncellenecek kategorinin Id'si: ");
+            int id = int.Parse(Console.ReadLine());
+
+            Category categoryToUpdate = _database.Categories.FirstOrDefault(x => x.Id == id);
+
+            Console.Write("Kategorinin yeni adını girin: ");
+            string name = Console.ReadLine();
+
+            if (!String.IsNullOrEmpty(name))
+                categoryToUpdate.Name = name;
+
+            //Ternary operator
+            //categoryToUpdate.Name = String.IsNullOrEmpty(name) ? categoryToUpdate.Name : name;
+
+
+            Console.Write("Kategorinin yeni açıklamasını girin: ");
+            string description = Console.ReadLine();
+
+            if(!String.IsNullOrEmpty(description))
+                categoryToUpdate.Description = description;
+
+
+
+            _database.Categories.Update(categoryToUpdate);
+            _database.SaveChanges();
+        }
+
 
         public void AddSeedData()
         {

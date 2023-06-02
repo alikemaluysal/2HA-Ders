@@ -19,9 +19,8 @@ namespace ECommerce
             //1 - Ürün Ekle
             //2 - Ürün Listele
             //İşlem: 1 (productService.Create())
-
+            
             //Bunu github'a yükle
-
 
             ECommerceService eCommerce = new ECommerceService();
             eCommerce.Run();
