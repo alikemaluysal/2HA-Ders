@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Service
 {
-    public class ProductService : IService
+    public class ProductService : IProductService
     {
 
         #region Ödev
@@ -46,7 +46,11 @@ namespace ECommerce.Service
             _database = database;
         }
 
+        //OOP
         //Dependency Injection
+
+        //SOLID Prensipleri
+        //D: Dependency Inversion
 
         public void Create()
         {
@@ -72,6 +76,7 @@ namespace ECommerce.Service
 
 
             _database.Products.Add(product);
+            //..50 satır
             _database.SaveChanges();
 
         }

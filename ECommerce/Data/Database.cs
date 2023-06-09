@@ -16,6 +16,11 @@ namespace ECommerce.Data
         public DbSet<Product> Products { get; set; }
 
 
+        public Database()
+        {
+            Console.WriteLine("Database 1'e bağlanıldı.");
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase("InMemoryDb");

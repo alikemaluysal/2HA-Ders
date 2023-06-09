@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Entities;
+using ECommerce.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ECommerce.Service
         public void Run()
         {
             Database database = new Database();
-            CategoryService categoryService = new CategoryService(database);
+            CategoryService categoryService = new CategoryService(new CategoryRepository(database));
             ProductService productService = new ProductService(database);
             categoryService.AddSeedData();
             productService.AddSeedData();
@@ -61,7 +62,7 @@ namespace ECommerce.Service
                 switch (domain)
                 {
                     case "1":
-                        service = new CategoryService(db);
+                        service = new CategoryService(new CategoryRepository(db));
                         break;
 
                     case "2":
@@ -122,7 +123,7 @@ namespace ECommerce.Service
         private static void CategoryDemo()
         {
             Database database = new Database();
-            CategoryService categoryService = new CategoryService(database);
+            CategoryService categoryService = new CategoryService(new CategoryRepository(database));
 
             //categoryService.AddFakeData(database);
             categoryService.GetAll();

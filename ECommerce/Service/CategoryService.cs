@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Entities;
+using ECommerce.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Service
 {
-    public class CategoryService : IService
+    public class CategoryService : ICategoryService
     {
 
-        Database _database;
+        IRepository<Category> _repository;
 
-        public CategoryService(Database database)
+        public CategoryService(IRepository<Category> repository)
         {
-            _database = database;
+            _repository = repository;
         }
 
         public void Create()
@@ -27,14 +28,13 @@ namespace ECommerce.Service
             Console.Write("Kategori Açıklaması: ");
             category.Description = Console.ReadLine();
 
-            _database.Categories.Add(category);
+            _repository.Add(category);
 
-            _database.SaveChanges();
         }
 
         public void GetAll()
         {
-            foreach (var category in _database.Categories)
+            foreach (var category in _repository.GetAll())
             {
                 Console.WriteLine($"{category.Id} - {category.Name} - {category.Description}");
             }
@@ -45,9 +45,8 @@ namespace ECommerce.Service
             GetAll();
             Console.Write("Silinecek kategorinin Id'sini girin: ");
             int id = int.Parse(Console.ReadLine());
-            Category categoryToDelete = _database.Categories.FirstOrDefault(c => c.Id == id);
-            _database.Categories.Remove(categoryToDelete);
-            _database.SaveChanges();
+            Category categoryToDelete = _repository.GetAll().FirstOrDefault(c => c.Id == id);
+            _repository.Delete(categoryToDelete);
         }
 
         public void Update()
@@ -59,7 +58,7 @@ namespace ECommerce.Service
             Console.Write("Güncellenecek kategorinin Id'si: ");
             int id = int.Parse(Console.ReadLine());
 
-            Category categoryToUpdate = _database.Categories.FirstOrDefault(x => x.Id == id);
+            Category categoryToUpdate = _repository.GetAll().FirstOrDefault(x => x.Id == id);
 
             Console.Write("Kategorinin yeni adını girin: ");
             string name = Console.ReadLine();
@@ -79,8 +78,7 @@ namespace ECommerce.Service
 
 
 
-            _database.Categories.Update(categoryToUpdate);
-            _database.SaveChanges();
+            _repository.Update(categoryToUpdate);
         }
 
 
@@ -90,10 +88,9 @@ namespace ECommerce.Service
             Category category2 = new Category() { Id = 2, Name = "Telefon", Description = "Telefon Kategorisi" };
             Category category3 = new Category() { Id = 3, Name = "Bilgisayar", Description = "Bilgisayar Kategorisi" };
 
-            _database.Categories.Add(category1);
-            _database.Categories.Add(category2);
-            _database.Categories.Add(category3);
-            _database.SaveChanges();
+            _repository.Add(category1);
+            _repository.Add(category2);
+            _repository.Add(category3);
         }
 
     }
